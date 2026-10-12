@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Your Name Editing Portfolio</title>
-<meta name="description" content="Video editor portfolio: short-form and YouTube edits, channel results, and how to hire me.">
+<title>Kysophy Editing Portfolio</title>
+<meta name="description" content="Kysophy (Kai), video editor and creator of a Decaying Winter YouTube channel with 5.9M+ views. Cinematic edits, game guides and Shorts.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-  /* Layout: dark editing-suite feel. Huge hero over a live timeline, then clips, channel + proof, services, contact. */
+  /* Layout: dark editing-suite feel. Huge hero over a live timeline, then edits, channel + earnings proof, services, contact. */
   :root {
     --bg: #131315;
     --surface: #1b1b1f;
@@ -17,9 +17,10 @@
     --line: #2e2e35;
     --fg: #f0ebe3;
     --muted: #9d988f;
-    --accent: #f2b84b;      /* timeline-marker amber */
-    --on-accent: #1a1406;
-    --rec: #ff5a4e;
+    --accent: #ff6b3d;      /* ember orange, from the channel logo */
+    --on-accent: #1d0a03;
+    --rec: #ff4a3d;
+    --good: #46c98b;
     --font-display: 'Schibsted Grotesk', 'Helvetica Neue', Arial, sans-serif;
     --font-body: 'IBM Plex Sans', 'Segoe UI', Roboto, sans-serif;
     --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
@@ -29,13 +30,13 @@
   @media (prefers-color-scheme: light) {
     :root:not([data-theme="dark"]) {
       --bg: #f4f3f0; --surface: #ffffff; --surface-2: #ebe9e4; --line: #dbd8d1;
-      --fg: #18181b; --muted: #5f5c56; --accent: #b67a0c; --on-accent: #ffffff; --rec: #d93a2f;
+      --fg: #18181b; --muted: #5f5c56; --accent: #c2410c; --on-accent: #ffffff; --rec: #d9342b; --good: #1f9a5e;
       color-scheme: light;
     }
   }
   :root[data-theme="light"] {
     --bg: #f4f3f0; --surface: #ffffff; --surface-2: #ebe9e4; --line: #dbd8d1;
-    --fg: #18181b; --muted: #5f5c56; --accent: #b67a0c; --on-accent: #ffffff; --rec: #d93a2f;
+    --fg: #18181b; --muted: #5f5c56; --accent: #c2410c; --on-accent: #ffffff; --rec: #d9342b; --good: #1f9a5e;
     color-scheme: light;
   }
 
@@ -53,9 +54,18 @@
   }
   a { color: inherit; }
   button { font: inherit; color: inherit; }
+  img { max-width: 100%; }
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
   .wrap { max-width: var(--wrap); margin: 0 auto; padding-inline: 24px; }
-  .mono { font-family: var(--font-mono); }
+
+  /* Logo swaps with the theme: red mark on dark, colorful mark on light */
+  .logo-light { display: none; }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) .logo-dark { display: none; }
+    :root:not([data-theme="dark"]) .logo-light { display: block; }
+  }
+  :root[data-theme="light"] .logo-dark { display: none; }
+  :root[data-theme="light"] .logo-light { display: block; }
 
   /* ---------- Top bar ---------- */
   .topbar {
@@ -65,7 +75,8 @@
     border-bottom: 1px solid var(--line);
   }
   .topbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 64px; }
-  .brand { font-family: var(--font-display); font-weight: 600; font-size: 18px; text-decoration: none; letter-spacing: -0.01em; white-space: nowrap; }
+  .brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 600; font-size: 18px; text-decoration: none; letter-spacing: -0.01em; white-space: nowrap; }
+  .brand img { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; }
   .brand span { color: var(--muted); font-weight: 500; }
   .nav { display: flex; align-items: center; gap: 26px; }
   .nav a { text-decoration: none; font-size: 15px; color: var(--muted); transition: color .2s; }
@@ -88,10 +99,12 @@
   @keyframes blink { 50% { opacity: .25; } }
   .hero h1 {
     font-family: var(--font-display); font-weight: 600;
-    font-size: clamp(52px, 11vw, 136px); line-height: 0.95; letter-spacing: -0.045em;
-    margin: 0; text-wrap: balance;
+    font-size: clamp(56px, 12vw, 148px); line-height: 0.95; letter-spacing: -0.045em;
+    margin: 0;
   }
-  .lead { max-width: 56ch; font-size: clamp(17px, 2vw, 20px); color: var(--muted); margin: 28px 0 38px; }
+  .aka { display: block; margin-top: 16px; font-family: var(--font-mono); font-size: clamp(15px, 1.8vw, 18px); color: var(--muted); letter-spacing: 0.02em; }
+  .aka b { color: var(--accent); font-weight: 500; }
+  .lead { max-width: 58ch; font-size: clamp(17px, 2vw, 20px); color: var(--muted); margin: 26px 0 38px; }
   .lead strong { color: var(--fg); font-weight: 500; }
   .actions { display: flex; flex-wrap: wrap; gap: 14px; }
   .btn {
@@ -146,7 +159,7 @@
   .sec-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px 24px; margin-bottom: 36px; }
   .sec-head h2 { font-family: var(--font-display); font-weight: 600; font-size: clamp(34px, 5vw, 56px); letter-spacing: -0.03em; line-height: 1; margin: 0; }
   .sec-head p { margin: 0; color: var(--muted); font-size: 15px; max-width: 44ch; }
-  .sub-head { display: flex; align-items: baseline; gap: 14px; margin: 52px 0 18px; }
+  .sub-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin: 52px 0 18px; }
   .sub-head h3 { font-family: var(--font-display); font-weight: 600; font-size: 22px; letter-spacing: -0.02em; margin: 0; }
   .sub-head span { font-family: var(--font-mono); font-size: 12px; color: var(--muted); letter-spacing: 0.06em; }
 
@@ -158,7 +171,6 @@
     background-size: cover; background-position: center;
     max-width: 100%;
   }
-  .clip-thumb.has-img { background-color: #000; }
   .showreel .clip-thumb { aspect-ratio: 16 / 9; }
   .ratio-916 { aspect-ratio: 9 / 16; }
   .ratio-169 { aspect-ratio: 16 / 9; }
@@ -179,10 +191,11 @@
   a:hover .play { transform: translate(-50%, -50%) scale(1.08); background: rgba(255,255,255,.26); }
   .badge {
     position: absolute; z-index: 2; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.04em;
-    color: #fff; background: rgba(0,0,0,.55); padding: 3px 8px; border-radius: 6px;
+    color: #fff; background: rgba(0,0,0,.6); padding: 3px 8px; border-radius: 6px;
   }
   .badge.dur { right: 12px; bottom: 12px; }
   .badge.fmt { left: 12px; top: 12px; }
+  .badge.ad { left: 12px; top: 12px; background: var(--accent); color: var(--on-accent); }
   .reel-label {
     position: absolute; z-index: 2; left: clamp(16px, 3vw, 32px); bottom: clamp(16px, 3vw, 28px);
     color: #fff; font-family: var(--font-display); font-weight: 600; font-size: clamp(22px, 3.4vw, 40px); letter-spacing: -0.03em; line-height: 1.05;
@@ -194,36 +207,38 @@
   }
   .clip-thumb.has-img .placeholder-note { display: none; }
 
-  .grid-shorts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
-  .grid-long { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+  .grid-long { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+  .grid-shorts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; max-width: 900px; }
   .clip { display: flex; flex-direction: column; gap: 14px; text-decoration: none; min-width: 0; }
   .clip:hover .clip-thumb { border-color: var(--accent); }
   .clip-info h4 { font-family: var(--font-display); font-weight: 600; font-size: 18px; letter-spacing: -0.01em; margin: 0 0 4px; line-height: 1.25; }
   .clip-info .meta { font-family: var(--font-mono); font-size: 12px; color: var(--muted); letter-spacing: 0.03em; margin: 0 0 10px; }
+  .clip-info .note { font-size: 14.5px; color: var(--muted); margin: 0 0 10px; }
   .tags { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 0; padding: 0; }
   .tags li { font-size: 12px; padding: 2px 9px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); }
 
   /* ---------- Channel & proof ---------- */
   .channel-grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr); gap: 24px; align-items: start; }
-  .channel-card { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 28px; display: grid; gap: 24px; }
-  .ch-head { display: flex; align-items: center; gap: 16px; min-width: 0; }
+  .channel-card { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; overflow: hidden; }
+  .ch-banner { display: block; width: 100%; aspect-ratio: 16 / 7; object-fit: cover; object-position: center 40%; }
+  .ch-body { padding: 0 28px 28px; display: grid; gap: 20px; }
+  .ch-head { display: flex; align-items: flex-end; gap: 16px; min-width: 0; margin-top: -36px; }
   .ch-avatar {
-    width: 64px; height: 64px; border-radius: 50%; flex-shrink: 0; overflow: hidden;
-    background: linear-gradient(135deg, var(--accent), var(--rec));
-    display: grid; place-items: center; color: #1a1406; font-family: var(--font-display); font-weight: 700; font-size: 22px;
+    width: 84px; height: 84px; border-radius: 50%; flex-shrink: 0; overflow: hidden;
+    box-shadow: 0 0 0 4px var(--surface); background: var(--surface);
   }
   .ch-avatar img { width: 100%; height: 100%; object-fit: cover; }
-  .ch-head h3 { font-family: var(--font-display); font-weight: 600; font-size: 22px; margin: 0; letter-spacing: -0.02em; }
+  .ch-head h3 { font-family: var(--font-display); font-weight: 600; font-size: 24px; margin: 0; letter-spacing: -0.02em; line-height: 1.2; }
   .ch-head p { margin: 0; font-family: var(--font-mono); font-size: 13px; color: var(--muted); overflow-wrap: anywhere; }
-  .ch-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 16px; }
-  .ch-stats b { display: block; font-family: var(--font-display); font-size: 28px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; font-variant-numeric: tabular-nums; }
-  .ch-stats span { font-size: 13px; color: var(--muted); }
-  .ch-flag {
-    display: inline-flex; align-items: center; gap: 8px; justify-self: start;
-    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.05em;
-    padding: 6px 12px; border-radius: 999px; background: color-mix(in srgb, #46c98b 16%, var(--surface)); color: var(--fg);
+  .ch-desc { margin: 0; font-size: 15.5px; color: var(--muted); }
+  .ch-chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
+  .ch-chips li {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em;
+    padding: 5px 12px; border-radius: 999px; border: 1px solid var(--line);
   }
-  .ch-flag::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #46c98b; }
+  .ch-chips li.ok { border-color: transparent; background: color-mix(in srgb, var(--good) 16%, var(--surface)); }
+  .ch-chips li.ok::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--good); }
   .ch-links { display: flex; flex-wrap: wrap; gap: 10px; }
   .ch-links .btn { padding: 11px 18px; font-size: 12.5px; }
 
@@ -232,19 +247,44 @@
   .proof:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 16px; }
   .proof.wide { grid-column: 1 / -1; }
   .proof-media {
-    position: relative; aspect-ratio: 16 / 10; max-width: 100%; border-radius: 16px; overflow: hidden;
+    position: relative; aspect-ratio: 3 / 4; max-width: 100%; border-radius: 16px; overflow: hidden;
     border: 1.5px dashed var(--line); background: var(--surface-2);
     display: grid; place-items: center; transition: border-color .2s;
   }
-  .proof.wide .proof-media { aspect-ratio: 21 / 8; }
+  .proof.wide .proof-media { aspect-ratio: 1552 / 840; }
   .proof:hover .proof-media { border-color: var(--accent); }
-  .proof-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top left; }
-  .proof-media.filled { border-style: solid; }
+  .proof-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+  .proof-media.filled { border-style: solid; background: #0f0f0f; }
   .proof-empty { text-align: center; padding: 16px; font-family: var(--font-mono); font-size: 12px; color: var(--muted); line-height: 1.6; }
-  .proof-empty svg { width: 26px; height: 26px; display: block; margin: 0 auto 8px; opacity: .7; }
-  .proof-cap { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+  .proof-cap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 12px; align-items: baseline; }
   .proof-cap strong { font-weight: 500; font-size: 15px; }
-  .proof-cap span { font-family: var(--font-mono); font-size: 11.5px; color: var(--muted); letter-spacing: 0.04em; white-space: nowrap; }
+  .proof-cap span { font-family: var(--font-mono); font-size: 11.5px; color: var(--muted); letter-spacing: 0.04em; }
+
+  /* ---------- Earnings chart ---------- */
+  .earnings { margin-top: 28px; background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: clamp(20px, 3vw, 32px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr); gap: clamp(24px, 4vw, 48px); }
+  .earn-facts { display: grid; gap: 22px; align-content: start; }
+  .earn-facts h3 { font-family: var(--font-display); font-weight: 600; font-size: 22px; letter-spacing: -0.02em; margin: 0; }
+  .earn-fact b { display: block; font-family: var(--font-display); font-weight: 600; font-size: clamp(30px, 3.6vw, 40px); letter-spacing: -0.03em; line-height: 1.05; font-variant-numeric: tabular-nums; }
+  .earn-fact span { font-size: 14px; color: var(--muted); }
+  .chart { position: relative; min-width: 0; }
+  .chart-title { font-size: 14px; color: var(--muted); margin: 0 0 14px; }
+  .plot { position: relative; height: 230px; margin-left: 44px; }
+  .gridline { position: absolute; left: 0; right: 0; height: 0; border-top: 1px solid var(--line); }
+  .gridline span { position: absolute; right: calc(100% + 8px); top: -9px; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .bars { position: absolute; inset: 0; display: flex; align-items: flex-end; gap: 2px; }
+  .bar { flex: 1; height: 100%; display: flex; align-items: flex-end; justify-content: center; position: relative; cursor: default; outline: none; }
+  .bar i { display: block; width: 72%; max-width: 22px; border-radius: 4px 4px 0 0; background: color-mix(in srgb, var(--accent) 55%, var(--surface)); transition: background .15s; }
+  .bar.top i { background: var(--accent); }
+  .bar:hover i, .bar:focus-visible i { background: var(--fg); }
+  .bar .direct { position: absolute; bottom: calc(var(--h) + 6px); font-family: var(--font-mono); font-size: 11px; color: var(--fg); white-space: nowrap; }
+  .xlabels { display: flex; gap: 2px; margin-left: 44px; margin-top: 8px; font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+  .xlabels span { flex: 1; text-align: center; white-space: nowrap; overflow: visible; }
+  .tip {
+    position: absolute; z-index: 3; pointer-events: none; transform: translate(-50%, -100%);
+    background: var(--fg); color: var(--bg); font-family: var(--font-mono); font-size: 12px;
+    padding: 6px 10px; border-radius: 8px; white-space: nowrap;
+  }
+  .chart-note { font-size: 13px; color: var(--muted); margin: 16px 0 0; }
 
   /* ---------- Services ---------- */
   .services { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--line); }
@@ -281,7 +321,7 @@
 
   /* ---------- Viewer (video / screenshot) ---------- */
   .viewer {
-    position: fixed; inset: 0; z-index: 50; background: rgba(8,8,10,.86);
+    position: fixed; inset: 0; z-index: 50; background: rgba(8,8,10,.88);
     display: grid; place-items: center; padding: 56px 16px 24px;
     backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
   }
@@ -298,8 +338,9 @@
 
   /* ---------- Responsive ---------- */
   @media (max-width: 960px) {
-    .grid-shorts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-long { grid-template-columns: minmax(0, 1fr); max-width: 640px; }
     .channel-grid { grid-template-columns: minmax(0, 1fr); }
+    .earnings { grid-template-columns: minmax(0, 1fr); }
     .services { grid-template-columns: minmax(0, 1fr); }
     .service, .service + .service { padding: 24px 0; border-left: 0; }
   }
@@ -307,13 +348,17 @@
     .wrap { padding-inline: 18px; }
     .nav a { display: none; }
     .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .grid-long { grid-template-columns: minmax(0, 1fr); }
-    .grid-shorts { gap: 14px; }
-    .proofs { grid-template-columns: minmax(0, 1fr); }
-    .proof.wide .proof-media { aspect-ratio: 16 / 10; }
+    /* shorts become a swipeable row on phones */
+    .grid-shorts {
+      grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 66%;
+      overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px; padding-bottom: 8px;
+    }
+    .grid-shorts .clip { scroll-snap-align: start; }
     .btn { padding: 13px 20px; font-size: 13px; }
     .play { width: 46px; height: 46px; }
     .clip-info h4 { font-size: 16px; }
+    .ch-body { padding: 0 20px 22px; }
+    .bar .direct { display: none; }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -325,8 +370,11 @@
 <!-- ===================== TOP BAR ===================== -->
 <header class="topbar">
   <div class="wrap">
-    <!-- EDIT: your name -->
-    <a class="brand" href="#top">Kysophy <span>· Video Editor</span></a>
+    <a class="brand" href="#top">
+      <img class="logo-dark" src="logo-dark.png" alt="">
+      <img class="logo-light" src="logo-light.png" alt="">
+      Kysophy <span>· Video Editor</span>
+    </a>
     <nav class="nav" aria-label="Main">
       <a href="#work">Work</a>
       <a href="#channel">Channel</a>
@@ -343,10 +391,8 @@
   <!-- ===================== HERO ===================== -->
   <div class="wrap hero">
     <p class="eyebrow rise">Available for freelance editing</p>
-    <!-- EDIT: your name -->
-    <h1 class="rise d1">I'm Kysophy, you can call me Kai</h1>
-    <!-- EDIT: your one-line pitch -->
-    <p class="lead rise d2">I edit <strong>short-form</strong> and <strong>long-form</strong> videos built to hold attention: pacing, motion graphics, captions and clean sfx. I run my own channel, so I edit for the results, not just for looks.</p>
+    <h1 class="rise d1">I'm Kysophy<span class="aka">You can call me <b>Kai</b>.</span></h1>
+    <p class="lead rise d2">I'm a video editor and the creator behind a <strong>Decaying Winter</strong> YouTube channel with <strong>5.9M+ views</strong>, almost all from long-form videos. I cut cinematic pieces, game guides and fun, fast-paced videos, with the pacing, subtitles and sound design that keep people watching.</p>
     <div class="actions rise d3">
       <a class="btn" href="#work">View my edits
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
@@ -357,7 +403,7 @@
     </div>
 
     <div class="timeline rise d4" aria-hidden="true">
-      <div class="tl-top"><span>SEQUENCE · 1080×1920 · 30 fps</span><span class="tc" id="tc">00:00:11:12</span></div>
+      <div class="tl-top"><span>SEQUENCE · 1920×1080 · 60 fps</span><span class="tc" id="tc">00:00:11:12</span></div>
       <div class="tl-body">
         <span>V2</span>
         <div class="track v2">
@@ -378,12 +424,15 @@
       </div>
     </div>
 
-    <!-- EDIT: your real numbers (replace every 0) -->
+    <!--
+      Numbers use "+" so they stay true as the channel grows. No need to update them often.
+      Source: channel page (5,940,837 views, 18.4K subs, 153 videos) and the earnings sheet ($1,154.84 lifetime).
+    -->
     <div class="stats">
-      <div class="stat"><b>0.0M+</b><span>Views on videos I edited</span></div>
-      <div class="stat"><b>000+</b><span>Videos edited</span></div>
-      <div class="stat"><b>00</b><span>Clients &amp; creators</span></div>
-      <div class="stat"><b>00%</b><span>Avg. viewer retention</span></div>
+      <div class="stat"><b>5.9M+</b><span>Channel views, mostly long-form</span></div>
+      <div class="stat"><b>18K+</b><span>Subscribers</span></div>
+      <div class="stat"><b>150+</b><span>Videos published</span></div>
+      <div class="stat"><b>$1,150+</b><span>Earned on YouTube</span></div>
     </div>
   </div>
 
@@ -392,96 +441,103 @@
     <div class="wrap">
       <div class="sec-head">
         <h2>My edits</h2>
-        <p>Tap any video to watch it here. Every clip lists what I handled in the edit.</p>
+        <p>Tap any video to watch it here. Each one lists what I focused on in the edit.</p>
       </div>
 
       <!--
-        HOW TO ADD A VIDEO: put the video's link in href="...".
-        YouTube links (watch, youtu.be, or /shorts/) play right on this page and use their own thumbnail automatically.
-        TikTok / Instagram links open in a new tab. For those, add a thumbnail image with data-thumb="thumbs/clip1.jpg".
+        HOW TO ADD A VIDEO: put the YouTube link in href="...".
+        Links play right on this page and pull their own thumbnail automatically.
       -->
 
-      <!-- EDIT: your showreel (a 30–60s montage of your best moments) -->
+      <!-- EDIT: your showreel (a 30–60s montage of your best moments). Put its YouTube link in href. -->
       <a class="showreel" href="#">
         <div class="clip-thumb" style="--c1:#4b2a1e;--c2:#1d2b4a">
-          <span class="placeholder-note">Add your showreel link</span>
+          <span class="placeholder-note">Showreel coming soon</span>
           <span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>
-          <span class="reel-label"><small>Showreel · 2026</small>The best 60 seconds of my work</span>
+          <span class="reel-label"><small>Showreel</small>The best 60 seconds of my work</span>
         </div>
       </a>
 
-      <div class="sub-head"><h3>Short-form</h3><span>9:16 · Shorts, Reels</span></div>
-      <!-- EDIT: one <a class="clip"> per short -->
-      <div class="grid-shorts">
-        <a class="clip" href="#">
-          <div class="clip-thumb ratio-916" style="--c1:#5b2340;--c2:#1f1d4d">
-            <span class="badge fmt">SHORTS</span><span class="badge dur">0:42</span>
-            <span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>
-          </div>
-          <div class="clip-info">
-            <h4>Short title goes here</h4>
-            <p class="meta">6M views · My channel</p>
-            <ul class="tags"><li>Captions</li><li>Sound design</li></ul>
-          </div>
-        </a>
-        <a class="clip" href="#">
-          <div class="clip-thumb ratio-916" style="--c1:#1e4a44;--c2:#16263f">
-            <span class="badge fmt">TIKTOK</span><span class="badge dur">0:31</span>
-            <span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>
-          </div>
-          <div class="clip-info">
-            <h4>Short title goes here</h4>
-            <p class="meta">000K views · Client</p>
-            <ul class="tags"><li>Motion graphics</li><li>Zoom cuts</li></ul>
-          </div>
-        </a>
-        <a class="clip" href="#">
-          <div class="clip-thumb ratio-916" style="--c1:#4d3a12;--c2:#3a1630">
-            <span class="badge fmt">REELS</span><span class="badge dur">0:58</span>
-            <span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>
-          </div>
-          <div class="clip-info">
-            <h4>Short title goes here</h4>
-            <p class="meta">000K views · My channel</p>
-            <ul class="tags"><li>Storytelling</li><li>B-roll</li></ul>
-          </div>
-        </a>
-        <a class="clip" href="#">
-          <div class="clip-thumb ratio-916" style="--c1:#24324f;--c2:#401f1f">
-            <span class="badge fmt">SHORTS</span><span class="badge dur">0:24</span>
-            <span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>
-          </div>
-          <div class="clip-info">
-            <h4>Short title goes here</h4>
-            <p class="meta">000K views · Client</p>
-            <ul class="tags"><li>Hook rewrite</li><li>Color</li></ul>
-          </div>
-        </a>
-      </div>
-
       <div class="sub-head"><h3>Long-form</h3><span>16:9 · YouTube</span></div>
-      <!-- EDIT: one <a class="clip"> per long video -->
       <div class="grid-long">
         <a class="clip" href="https://youtu.be/a_zEmeiFlfs">
           <div class="clip-thumb ratio-169" style="--c1:#2b2350;--c2:#13353a">
-            <span class="badge fmt">YOUTUBE</span><span class="badge dur">12:47</span>
+            <span class="badge fmt">CINEMATIC</span>
+            <!-- EDIT: add the length if you want, e.g. <span class="badge dur">12:30</span> -->
             <span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>
           </div>
           <div class="clip-info">
             <h4>One Last Time, God Can't Save Us | Decaying Winter</h4>
-            <p class="meta">100K views · Kysophy</p>
-            <ul class="tags"><li>Full edit</li><li>Pacing</li><li>Thumbnails</li></ul>
+            <!-- EDIT: views. Your sheet had 104,757, so "100K+" stays true. -->
+            <p class="meta">100K+ views · Kysophy</p>
+            <p class="note">A cinematic edit built around mood, music and timing.</p>
+            <ul class="tags"><li>Cinematic</li><li>Music sync</li><li>Sound design</li></ul>
           </div>
         </a>
-        <a class="clip" href="#">
+        <a class="clip" href="https://youtu.be/fLg0DKmeNOA">
           <div class="clip-thumb ratio-169" style="--c1:#4a2a16;--c2:#1c2c3c">
-            <span class="badge fmt">YOUTUBE</span><span class="badge dur">8:05</span>
+            <span class="badge fmt">GUIDE</span><span class="badge dur">9:21</span>
             <span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>
           </div>
           <div class="clip-info">
-            <h4>Long video title goes here</h4>
-            <p class="meta">000K views · Client</p>
-            <ul class="tags"><li>Motion graphics</li><li>Sound design</li></ul>
+            <h4>How To Beat DEEP RESEARCH Ending | Decaying Winter: Lost Concept</h4>
+            <!-- EDIT: views ("33K+" was the count shown on your channel page) -->
+            <p class="meta">33K+ views · Kysophy</p>
+            <p class="note">A clear walkthrough with subtitles and sound effects that make each step easy to follow.</p>
+            <ul class="tags"><li>Guide</li><li>Subtitles</li><li>SFX</li></ul>
+          </div>
+        </a>
+        <a class="clip" href="https://youtu.be/y-hbzkV5isc">
+          <div class="clip-thumb ratio-169" style="--c1:#24324f;--c2:#401f1f">
+            <span class="badge fmt">MY STYLE</span><span class="badge dur">15:34</span>
+            <span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>
+          </div>
+          <div class="clip-info">
+            <h4>Meet the Riskrunner &amp; Lazarus | Roblox Decaying Winter</h4>
+            <!-- EDIT: views ("16K+" was the count on its first day) -->
+            <p class="meta">16K+ views · Kysophy</p>
+            <p class="note">How I usually edit: fun content with fast pacing that keeps the energy up.</p>
+            <ul class="tags"><li>Pacing</li><li>Comedy timing</li><li>Full edit</li></ul>
+          </div>
+        </a>
+      </div>
+
+      <div class="sub-head"><h3>Short-form</h3><span>9:16 · YouTube Shorts</span></div>
+      <div class="grid-shorts">
+        <a class="clip" href="https://youtube.com/shorts/BHITIySwMwE">
+          <div class="clip-thumb ratio-916" style="--c1:#5b2340;--c2:#1f1d4d">
+            <span class="badge ad">SPONSORED AD</span>
+            <span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>
+          </div>
+          <div class="clip-info">
+            <h4>The study hack nobody tells you about | Google Gemini</h4>
+            <!-- EDIT: views. Add them after "Unlisted", e.g. "Ad for Google Gemini · Unlisted · 10K+ views" -->
+            <p class="meta">Ad for Google Gemini · Unlisted</p>
+            <ul class="tags"><li>Hook</li><li>Subtitles</li><li>SFX</li><li>Ad edit</li></ul>
+          </div>
+        </a>
+        <a class="clip" href="https://youtube.com/shorts/AVcNjU7rxmc">
+          <div class="clip-thumb ratio-916" style="--c1:#1e4a44;--c2:#16263f">
+            <span class="badge fmt">GUIDE</span>
+            <span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>
+          </div>
+          <div class="clip-info">
+            <h4>Activating Wave Ultima | Decaying Winter</h4>
+            <!-- EDIT: views. Add them after "Game guide", e.g. "Game guide · 20K+ views" -->
+            <p class="meta">Game guide</p>
+            <ul class="tags"><li>Guide</li><li>Subtitles</li></ul>
+          </div>
+        </a>
+        <a class="clip" href="https://youtube.com/shorts/mYNC64aiGRE">
+          <div class="clip-thumb ratio-916" style="--c1:#4d3a12;--c2:#3a1630">
+            <span class="badge fmt">UPDATE</span>
+            <span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>
+          </div>
+          <div class="clip-info">
+            <h4>New Updated Models??? | Decaying Winter</h4>
+            <!-- EDIT: views. Add them after "Update coverage", e.g. "Update coverage · 15K+ views" -->
+            <p class="meta">Update coverage</p>
+            <ul class="tags"><li>News</li><li>Pacing</li></ul>
           </div>
         </a>
       </div>
@@ -493,59 +549,75 @@
     <div class="wrap">
       <div class="sec-head">
         <h2>My channel &amp; results</h2>
-        <p>Real numbers from my own channel. Tap a screenshot to see it full size.</p>
+        <p>Screenshots straight from my YouTube Studio. Tap one to see it full size.</p>
       </div>
 
       <div class="channel-grid">
-        <!-- EDIT: your channel info -->
         <div class="channel-card">
-          <div class="ch-head">
-            <!-- To use your channel picture: replace YN with <img src="channel.jpg" alt=""> -->
-            <div class="ch-avatar">YN</div>
-            <div style="min-width:0">
-              <h3>Channel Name</h3>
-              <p>@yourhandle · YouTube</p>
+          <img class="ch-banner" src="banner.jpg" alt="Snowy forest painting from the channel">
+          <div class="ch-body">
+            <div class="ch-head">
+              <div class="ch-avatar">
+                <img class="logo-dark" src="logo-dark.png" alt="Kysophy logo">
+                <img class="logo-light" src="logo-light.png" alt="Kysophy logo">
+              </div>
+              <div style="min-width:0">
+                <h3>Kysophy</h3>
+                <p>@Kysophy · YouTube</p>
+              </div>
             </div>
-          </div>
-          <div class="ch-stats">
-            <div><b>00K</b><span>Subscribers</span></div>
-            <div><b>0.0M</b><span>Total views</span></div>
-            <div><b>000</b><span>Videos posted</span></div>
-            <div><b>000K</b><span>Views, last 28 days</span></div>
-          </div>
-          <span class="ch-flag">Monetized</span>
-          <div class="ch-links">
-            <a class="btn" href="https://youtube.com/@yourhandle" target="_blank" rel="noopener">Visit channel ↗</a>
-            <a class="btn" href="https://tiktok.com/@yourhandle" target="_blank" rel="noopener">TikTok ↗</a>
+            <p class="ch-desc">Known as the Decaying Winter content creator. I also cover other games and post Shorts.</p>
+            <ul class="ch-chips">
+              <li class="ok">Monetized</li>
+              <li>Creating since 2019</li>
+              <li>Long-form focused</li>
+            </ul>
+            <div class="ch-links">
+              <a class="btn" href="https://www.youtube.com/@Kysophy" target="_blank" rel="noopener">Visit channel ↗</a>
+            </div>
           </div>
         </div>
 
-        <!--
-          EDIT: proof screenshots. Save each image in your GitHub repo with these exact file names
-          (or change the file names here). Cover anything private (bank details, emails) before uploading.
-        -->
+        <!-- Proof screenshots. Keep these image files in the same folder as index.html. -->
         <div class="proofs">
           <button class="proof wide" type="button" data-img="proof-analytics.png">
             <div class="proof-media">
-              <img src="proof-analytics.png" alt="Channel analytics overview">
-              <div class="proof-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 15l3-4 3 3 4-6"/></svg>Add proof-analytics.png</div>
+              <img src="proof-analytics.png" alt="YouTube Studio overview: 380.3K views and $193.71 estimated revenue, Sept to Oct 2026">
+              <div class="proof-empty">proof-analytics.png</div>
             </div>
-            <div class="proof-cap"><strong>Channel analytics overview</strong><span>VIEWS · WATCH TIME</span></div>
+            <div class="proof-cap"><strong>380K views in one month, 924% above normal</strong><span>SEPT–OCT 2026</span></div>
           </button>
           <button class="proof" type="button" data-img="proof-earnings.png">
             <div class="proof-media">
-              <img src="proof-earnings.png" alt="Channel earnings screenshot">
-              <div class="proof-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M12 8v8M9.5 10.5c0-1 1-1.5 2.5-1.5s2.5.6 2.5 1.6c0 2.4-5 1.2-5 3.6 0 1 1 1.8 2.5 1.8s2.5-.6 2.5-1.6"/></svg>Add proof-earnings.png</div>
+              <img src="proof-earnings.png" alt="YouTube Studio monthly earnings, May to October 2026">
+              <div class="proof-empty">proof-earnings.png</div>
             </div>
-            <div class="proof-cap"><strong>Channel earnings</strong><span>REVENUE</span></div>
+            <div class="proof-cap"><strong>Monthly earnings</strong><span>MAY–OCT 2026</span></div>
           </button>
-          <button class="proof" type="button" data-img="proof-retention.png">
+          <button class="proof" type="button" data-img="proof-channel.png">
             <div class="proof-media">
-              <img src="proof-retention.png" alt="Audience retention graph">
-              <div class="proof-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M6 8c3 0 4 6 7 6s3-3 5-3"/></svg>Add proof-retention.png</div>
+              <img src="proof-channel.png" alt="Kysophy channel page: 18.4K subscribers, 153 videos, 5,940,837 views">
+              <div class="proof-empty">proof-channel.png</div>
             </div>
-            <div class="proof-cap"><strong>Audience retention</strong><span>BEST VIDEO</span></div>
+            <div class="proof-cap"><strong>Public channel stats</strong><span>5.9M VIEWS</span></div>
           </button>
+        </div>
+      </div>
+
+      <!-- Earnings history from the earnings spreadsheet. It covers Mar 2025 to Sep 2026, so it never needs updating. -->
+      <div class="earnings">
+        <div class="earn-facts">
+          <h3>Earnings history</h3>
+          <div class="earn-fact"><b>$1,150+</b><span>Earned since the channel was monetized in March 2025</span></div>
+          <div class="earn-fact"><b>$202</b><span>Best month, August 2026</span></div>
+          <div class="earn-fact"><b>$697</b><span>Earned Jan–Sep 2026, already 1.5× all of 2025</span></div>
+        </div>
+        <div class="chart">
+          <p class="chart-title">YouTube earnings per month, US$</p>
+          <div class="plot" id="plot" role="img" aria-label="Monthly YouTube earnings from March 2025 to September 2026, rising to a best month of $202 in August 2026."></div>
+          <div class="xlabels" id="xlabels" aria-hidden="true"></div>
+          <div class="tip" id="tip" hidden></div>
+          <p class="chart-note">Hover or tap a bar to see the exact amount.</p>
         </div>
       </div>
     </div>
@@ -556,27 +628,26 @@
     <div class="wrap">
       <div class="sec-head">
         <h2>What I can edit for you</h2>
-        <p>Send me raw footage and a reference. I'll handle the rest.</p>
+        <p>Send me your footage and a reference video. I'll handle the rest.</p>
       </div>
-      <!-- EDIT: your services -->
       <div class="services">
         <div class="service">
-          <span class="fmt">9:16</span>
-          <h3>Short-form</h3>
-          <p>Shorts, TikToks and Reels cut for a strong hook and high retention.</p>
-          <ul><li>Hook-first structure</li><li>Animated captions</li><li>Sound effects &amp; music</li></ul>
-        </div>
-        <div class="service">
           <span class="fmt">16:9</span>
-          <h3>YouTube long-form</h3>
-          <p>Full edits that keep viewers watching to the end.</p>
-          <ul><li>Pacing &amp; jump cuts</li><li>B-roll &amp; zooms</li><li>Color &amp; audio cleanup</li></ul>
+          <h3>Gaming &amp; long-form</h3>
+          <p>Full YouTube edits that keep viewers watching to the end.</p>
+          <ul><li>Pacing &amp; comedy timing</li><li>Zooms, memes &amp; callouts</li><li>Audio cleanup &amp; music</li></ul>
         </div>
         <div class="service">
-          <span class="fmt">MOGRAPH</span>
-          <h3>Motion graphics</h3>
-          <p>Titles, lower thirds and animated explainers that make ideas easy to follow.</p>
-          <ul><li>Text animation</li><li>Maps &amp; callouts</li><li>Channel intros</li></ul>
+          <span class="fmt">CINEMATIC</span>
+          <h3>Cinematic &amp; guides</h3>
+          <p>Mood-driven cinematic cuts, and guides that make every step easy to follow.</p>
+          <ul><li>Music-synced cuts</li><li>Clear subtitles</li><li>Sound effects</li></ul>
+        </div>
+        <div class="service">
+          <span class="fmt">9:16</span>
+          <h3>Shorts &amp; ads</h3>
+          <p>Short-form videos and sponsored spots built around a strong hook.</p>
+          <ul><li>Hook-first structure</li><li>Animated subtitles</li><li>Brand-ready delivery</li></ul>
         </div>
       </div>
 
@@ -595,18 +666,14 @@
   <section id="contact" class="contact">
     <div class="wrap">
       <h2>Let's make your next video <span>hit.</span></h2>
-      <p class="contact-lead">Tell me about your channel and what you need edited. I usually reply within a day.</p>
+      <p class="contact-lead">Tell me about your channel and what you need edited. I'll get back to you as soon as I can.</p>
       <div class="email-row">
-        <!-- EDIT: your email (change it in both places on this line) -->
-        <a class="email" id="email" href="mailto:you@example.com">you@example.com</a>
+        <a class="email" id="email" href="mailto:Kysophic@gmail.com">Kysophic@gmail.com</a>
         <button class="copy-btn" id="copy-btn" type="button">Copy email</button>
       </div>
-      <!-- EDIT: your links -->
       <div class="socials">
-        <a class="btn solid" href="https://calendly.com/yourname" target="_blank" rel="noopener">Book a call ↗</a>
-        <a class="btn" href="https://youtube.com/@yourhandle" target="_blank" rel="noopener">YouTube ↗</a>
-        <a class="btn" href="https://tiktok.com/@yourhandle" target="_blank" rel="noopener">TikTok ↗</a>
-        <a class="btn" href="https://instagram.com/yourhandle" target="_blank" rel="noopener">Instagram ↗</a>
+        <a class="btn solid" href="mailto:Kysophic@gmail.com">Email me ↗</a>
+        <a class="btn" href="https://www.youtube.com/@Kysophy" target="_blank" rel="noopener">YouTube ↗</a>
       </div>
     </div>
   </section>
@@ -614,7 +681,7 @@
 
 <footer>
   <div class="wrap">
-    <span>© <span id="year">2026</span> Your Name</span>
+    <span>© <span id="year">2026</span> Kysophy</span>
     <span>Video editor · Open for freelance work</span>
   </div>
 </footer>
@@ -638,19 +705,19 @@
       try { localStorage.setItem('theme', next); } catch (e) {}
     });
 
-    /* Timeline playhead + timecode (30 fps, 24 s loop) */
+    /* Timeline playhead + timecode (60 fps, 24 s loop) */
     var head = document.getElementById('playhead'), tc = document.getElementById('tc');
     var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     function pad(n) { return (n < 10 ? '0' : '') + n; }
     function draw(t) {
       var p = (t % 24000) / 24000;
       head.style.left = (p * 100) + '%';
-      var frames = Math.floor(p * 24 * 30);
-      tc.textContent = '00:00:' + pad(Math.floor(frames / 30)) + ':' + pad(frames % 30);
+      var frames = Math.floor(p * 24 * 60);
+      tc.textContent = '00:00:' + pad(Math.floor(frames / 60)) + ':' + pad(frames % 60);
     }
     if (!still) { (function loop(t) { draw(t); requestAnimationFrame(loop); })(9000); }
 
-    /* Video links: YouTube plays here, everything else opens in a new tab */
+    /* Video links: YouTube plays here */
     function ytId(url) {
       var m = url.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/)|youtu\.be\/)([\w-]{11})/);
       return m ? m[1] : null;
@@ -668,7 +735,7 @@
       var id = ytId(href);
       var custom = a.getAttribute('data-thumb');
       if (custom || id) {
-        thumb.style.backgroundImage = 'url("' + (custom || ('https://i.ytimg.com/vi/' + id + '/hqdefault.jpg')) + '")';
+        thumb.style.backgroundImage = 'url("' + (custom || ('https://i.ytimg.com/vi/' + id + '/hqdefault.jpg')) + '"), linear-gradient(150deg, var(--c1, #3a2d5c), var(--c2, #12324a))';
         thumb.classList.add('has-img');
       }
       if (href !== '#' && !id) { a.target = '_blank'; a.rel = 'noopener'; }
@@ -699,6 +766,44 @@
         big.src = btn.getAttribute('data-img'); big.alt = img.alt;
         openViewer(big);
       });
+    });
+
+    /* Earnings chart (from the earnings spreadsheet, US$ per month) */
+    var data = [
+      ['Mar 2025', 16.72], ['Apr 2025', 68.86], ['May 2025', 57.88], ['Jun 2025', 51.90], ['Jul 2025', 47.26],
+      ['Aug 2025', 39.16], ['Sep 2025', 29.97], ['Oct 2025', 26.92], ['Nov 2025', 67.99], ['Dec 2025', 50.93],
+      ['Jan 2026', 17.20], ['Feb 2026', 29.34], ['Mar 2026', 24.31], ['Apr 2026', 18.48], ['May 2026', 37.69],
+      ['Jun 2026', 55.73], ['Jul 2026', 113.89], ['Aug 2026', 202.13], ['Sep 2026', 198.48]
+    ];
+    var max = 250, plot = document.getElementById('plot'), xl = document.getElementById('xlabels'), tip = document.getElementById('tip');
+    [50, 100, 150, 200, 250].forEach(function (v) {
+      var g = document.createElement('div'); g.className = 'gridline'; g.style.bottom = (v / max * 100) + '%';
+      g.innerHTML = '<span>$' + v + '</span>'; plot.appendChild(g);
+    });
+    var base = document.createElement('div'); base.className = 'gridline'; base.style.bottom = '0'; base.innerHTML = '<span>$0</span>'; plot.appendChild(base);
+    var bars = document.createElement('div'); bars.className = 'bars'; plot.appendChild(bars);
+    var best = Math.max.apply(null, data.map(function (d) { return d[1]; }));
+    data.forEach(function (d) {
+      var b = document.createElement('div'); b.className = 'bar' + (d[1] === best ? ' top' : '');
+      b.tabIndex = 0; b.setAttribute('aria-label', d[0] + ': $' + d[1].toFixed(2));
+      var h = (d[1] / max * 100) + '%';
+      b.style.setProperty('--h', h);
+      b.innerHTML = '<i style="height:' + h + '"></i>' + (d[1] === best ? '<span class="direct">$' + Math.round(d[1]) + '</span>' : '');
+      function show() {
+        var pr = plot.getBoundingClientRect(), br = b.getBoundingClientRect(), cr = plot.parentNode.getBoundingClientRect();
+        tip.textContent = d[0] + ' · $' + d[1].toFixed(2);
+        tip.hidden = false;
+        var x = br.left + br.width / 2 - cr.left;
+        x = Math.max(70, Math.min(cr.width - 70, x));
+        tip.style.left = x + 'px';
+        tip.style.top = (pr.bottom - cr.top - (d[1] / max) * pr.height - 10) + 'px';
+      }
+      b.addEventListener('pointerenter', show); b.addEventListener('focus', show); b.addEventListener('click', show);
+      b.addEventListener('pointerleave', function () { tip.hidden = true; }); b.addEventListener('blur', function () { tip.hidden = true; });
+      bars.appendChild(b);
+      var s = document.createElement('span');
+      s.textContent = (d[0] === 'Mar 2025' || d[0] === 'Jan 2026' || d[0] === 'Sep 2026') ? d[0].replace(' 20', " '") : '';
+      xl.appendChild(s);
     });
 
     /* Copy email */
