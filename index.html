@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Your Name Editing Portfolio</title>
+<meta name="description" content="Video editor portfolio: short-form and YouTube edits, channel results, and how to hire me.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  /* Layout: dark editing-suite feel. Huge hero over a live timeline, then clips, channel + proof, services, contact. */
+  :root {
+    --bg: #131315;
+    --surface: #1b1b1f;
+    --surface-2: #232328;
+    --line: #2e2e35;
+    --fg: #f0ebe3;
+    --muted: #9d988f;
+    --accent: #f2b84b;      /* timeline-marker amber */
+    --on-accent: #1a1406;
+    --rec: #ff5a4e;
+    --font-display: 'Schibsted Grotesk', 'Helvetica Neue', Arial, sans-serif;
+    --font-body: 'IBM Plex Sans', 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
+    --wrap: 1160px;
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #f4f3f0; --surface: #ffffff; --surface-2: #ebe9e4; --line: #dbd8d1;
+      --fg: #18181b; --muted: #5f5c56; --accent: #b67a0c; --on-accent: #ffffff; --rec: #d93a2f;
+      color-scheme: light;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #f4f3f0; --surface: #ffffff; --surface-2: #ebe9e4; --line: #dbd8d1;
+    --fg: #18181b; --muted: #5f5c56; --accent: #b67a0c; --on-accent: #ffffff; --rec: #d93a2f;
+    color-scheme: light;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  a { color: inherit; }
+  button { font: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding-inline: 24px; }
+  .mono { font-family: var(--font-mono); }
+
+  /* ---------- Top bar ---------- */
+  .topbar {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+    background: color-mix(in srgb, var(--bg) 86%, transparent);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 64px; }
+  .brand { font-family: var(--font-display); font-weight: 600; font-size: 18px; text-decoration: none; letter-spacing: -0.01em; white-space: nowrap; }
+  .brand span { color: var(--muted); font-weight: 500; }
+  .nav { display: flex; align-items: center; gap: 26px; }
+  .nav a { text-decoration: none; font-size: 15px; color: var(--muted); transition: color .2s; }
+  .nav a:hover { color: var(--fg); }
+  .theme-btn {
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 1px solid var(--line); background: transparent; color: var(--muted);
+    display: grid; place-items: center; cursor: pointer; transition: color .2s, border-color .2s;
+  }
+  .theme-btn:hover { color: var(--fg); border-color: var(--muted); }
+  .theme-btn svg { width: 16px; height: 16px; }
+
+  /* ---------- Hero ---------- */
+  .hero { padding-block: clamp(64px, 11vw, 136px) clamp(40px, 6vw, 72px); }
+  .eyebrow {
+    font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; color: var(--muted);
+    display: flex; align-items: center; gap: 10px; margin: 0 0 22px;
+  }
+  .eyebrow::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--rec); animation: blink 1.6s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: .25; } }
+  .hero h1 {
+    font-family: var(--font-display); font-weight: 600;
+    font-size: clamp(52px, 11vw, 136px); line-height: 0.95; letter-spacing: -0.045em;
+    margin: 0; text-wrap: balance;
+  }
+  .lead { max-width: 56ch; font-size: clamp(17px, 2vw, 20px); color: var(--muted); margin: 28px 0 38px; }
+  .lead strong { color: var(--fg); font-weight: 500; }
+  .actions { display: flex; flex-wrap: wrap; gap: 14px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 15px 26px; border-radius: 999px; border: 1.5px solid var(--fg);
+    text-decoration: none; background: transparent; cursor: pointer;
+    font-family: var(--font-mono); font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase;
+    transition: background .2s, color .2s, border-color .2s;
+  }
+  .btn svg { width: 16px; height: 16px; transition: transform .2s; }
+  .btn:hover { background: var(--fg); color: var(--bg); }
+  .btn:hover svg { transform: translateY(2px); }
+  .btn.solid { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  .btn.solid:hover { background: var(--fg); border-color: var(--fg); color: var(--bg); }
+  .btn.solid:hover svg { transform: translateX(3px); }
+
+  /* Timeline: the hero's signature moment */
+  .timeline {
+    margin-top: 64px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface);
+    padding: 14px 16px 16px; font-family: var(--font-mono); font-size: 11px; color: var(--muted);
+    overflow: hidden;
+  }
+  .tl-top { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 10px; letter-spacing: 0.06em; }
+  .tl-top .tc { color: var(--accent); font-variant-numeric: tabular-nums; }
+  .tl-body { position: relative; display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 6px 10px; align-items: center; }
+  .track { position: relative; height: 26px; border-radius: 6px; background: var(--surface-2); }
+  .track.audio { height: 30px; }
+  .seg { position: absolute; top: 3px; bottom: 3px; border-radius: 4px; }
+  .v2 .seg { background: color-mix(in srgb, #b28cff 70%, var(--surface)); }
+  .v1 .seg { background: color-mix(in srgb, #5aa9ff 70%, var(--surface)); }
+  .audio .seg {
+    background:
+      repeating-linear-gradient(90deg, color-mix(in srgb, #46c98b 85%, var(--surface)) 0 2px, transparent 2px 4px)
+      center / 100% 60% no-repeat,
+      color-mix(in srgb, #46c98b 30%, var(--surface));
+  }
+  .playhead-lane { position: absolute; top: 0; bottom: 0; left: 40px; right: 0; pointer-events: none; }
+  .playhead { position: absolute; top: -4px; bottom: -4px; width: 2px; background: var(--accent); left: 38%; }
+  .playhead::before { content: ""; position: absolute; top: -2px; left: -5px; width: 12px; height: 8px; background: var(--accent); border-radius: 2px; }
+
+  .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; margin-top: 40px; }
+  .stat { border-top: 1px solid var(--line); padding-top: 14px; }
+  .stat b { display: block; font-family: var(--font-display); font-weight: 600; font-size: clamp(30px, 4vw, 44px); letter-spacing: -0.03em; line-height: 1.05; font-variant-numeric: tabular-nums; }
+  .stat span { font-size: 14px; color: var(--muted); }
+
+  .rise { animation: rise .7s cubic-bezier(.2,.7,.2,1) both; }
+  .d1 { animation-delay: .08s; } .d2 { animation-delay: .16s; } .d3 { animation-delay: .24s; } .d4 { animation-delay: .32s; }
+  @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+  /* ---------- Sections ---------- */
+  section { padding-block: clamp(64px, 9vw, 112px); }
+  .sec-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px 24px; margin-bottom: 36px; }
+  .sec-head h2 { font-family: var(--font-display); font-weight: 600; font-size: clamp(34px, 5vw, 56px); letter-spacing: -0.03em; line-height: 1; margin: 0; }
+  .sec-head p { margin: 0; color: var(--muted); font-size: 15px; max-width: 44ch; }
+  .sub-head { display: flex; align-items: baseline; gap: 14px; margin: 52px 0 18px; }
+  .sub-head h3 { font-family: var(--font-display); font-weight: 600; font-size: 22px; letter-spacing: -0.02em; margin: 0; }
+  .sub-head span { font-family: var(--font-mono); font-size: 12px; color: var(--muted); letter-spacing: 0.06em; }
+
+  /* ---------- Clips ---------- */
+  .showreel { display: block; text-decoration: none; }
+  .clip-thumb {
+    position: relative; overflow: hidden; border-radius: 18px; border: 1px solid var(--line);
+    background: linear-gradient(150deg, var(--c1, #3a2d5c), var(--c2, #12324a));
+    background-size: cover; background-position: center;
+    max-width: 100%;
+  }
+  .clip-thumb.has-img { background-color: #000; }
+  .showreel .clip-thumb { aspect-ratio: 16 / 9; }
+  .ratio-916 { aspect-ratio: 9 / 16; }
+  .ratio-169 { aspect-ratio: 16 / 9; }
+  .clip-thumb::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,.55), transparent 45%);
+  }
+  .play {
+    position: absolute; z-index: 2; left: 50%; top: 50%; transform: translate(-50%, -50%);
+    width: 58px; height: 58px; border-radius: 50%;
+    background: rgba(255,255,255,.14); border: 1.5px solid rgba(255,255,255,.7);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: grid; place-items: center; transition: transform .25s, background .25s;
+  }
+  .play svg { width: 20px; height: 20px; margin-left: 3px; fill: #fff; }
+  .showreel .play { width: 84px; height: 84px; }
+  .showreel .play svg { width: 28px; height: 28px; }
+  a:hover .play { transform: translate(-50%, -50%) scale(1.08); background: rgba(255,255,255,.26); }
+  .badge {
+    position: absolute; z-index: 2; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.04em;
+    color: #fff; background: rgba(0,0,0,.55); padding: 3px 8px; border-radius: 6px;
+  }
+  .badge.dur { right: 12px; bottom: 12px; }
+  .badge.fmt { left: 12px; top: 12px; }
+  .reel-label {
+    position: absolute; z-index: 2; left: clamp(16px, 3vw, 32px); bottom: clamp(16px, 3vw, 28px);
+    color: #fff; font-family: var(--font-display); font-weight: 600; font-size: clamp(22px, 3.4vw, 40px); letter-spacing: -0.03em; line-height: 1.05;
+  }
+  .reel-label small { display: block; font-family: var(--font-mono); font-weight: 400; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; opacity: .8; margin-bottom: 6px; }
+  .placeholder-note {
+    position: absolute; z-index: 2; right: 12px; top: 12px; font-family: var(--font-mono); font-size: 10.5px;
+    color: rgba(255,255,255,.8); letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .clip-thumb.has-img .placeholder-note { display: none; }
+
+  .grid-shorts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+  .grid-long { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+  .clip { display: flex; flex-direction: column; gap: 14px; text-decoration: none; min-width: 0; }
+  .clip:hover .clip-thumb { border-color: var(--accent); }
+  .clip-info h4 { font-family: var(--font-display); font-weight: 600; font-size: 18px; letter-spacing: -0.01em; margin: 0 0 4px; line-height: 1.25; }
+  .clip-info .meta { font-family: var(--font-mono); font-size: 12px; color: var(--muted); letter-spacing: 0.03em; margin: 0 0 10px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 0; padding: 0; }
+  .tags li { font-size: 12px; padding: 2px 9px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); }
+
+  /* ---------- Channel & proof ---------- */
+  .channel-grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr); gap: 24px; align-items: start; }
+  .channel-card { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 28px; display: grid; gap: 24px; }
+  .ch-head { display: flex; align-items: center; gap: 16px; min-width: 0; }
+  .ch-avatar {
+    width: 64px; height: 64px; border-radius: 50%; flex-shrink: 0; overflow: hidden;
+    background: linear-gradient(135deg, var(--accent), var(--rec));
+    display: grid; place-items: center; color: #1a1406; font-family: var(--font-display); font-weight: 700; font-size: 22px;
+  }
+  .ch-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .ch-head h3 { font-family: var(--font-display); font-weight: 600; font-size: 22px; margin: 0; letter-spacing: -0.02em; }
+  .ch-head p { margin: 0; font-family: var(--font-mono); font-size: 13px; color: var(--muted); overflow-wrap: anywhere; }
+  .ch-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 16px; }
+  .ch-stats b { display: block; font-family: var(--font-display); font-size: 28px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .ch-stats span { font-size: 13px; color: var(--muted); }
+  .ch-flag {
+    display: inline-flex; align-items: center; gap: 8px; justify-self: start;
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.05em;
+    padding: 6px 12px; border-radius: 999px; background: color-mix(in srgb, #46c98b 16%, var(--surface)); color: var(--fg);
+  }
+  .ch-flag::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #46c98b; }
+  .ch-links { display: flex; flex-wrap: wrap; gap: 10px; }
+  .ch-links .btn { padding: 11px 18px; font-size: 12.5px; }
+
+  .proofs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+  .proof { all: unset; cursor: pointer; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+  .proof:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 16px; }
+  .proof.wide { grid-column: 1 / -1; }
+  .proof-media {
+    position: relative; aspect-ratio: 16 / 10; max-width: 100%; border-radius: 16px; overflow: hidden;
+    border: 1.5px dashed var(--line); background: var(--surface-2);
+    display: grid; place-items: center; transition: border-color .2s;
+  }
+  .proof.wide .proof-media { aspect-ratio: 21 / 8; }
+  .proof:hover .proof-media { border-color: var(--accent); }
+  .proof-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+  .proof-media.filled { border-style: solid; }
+  .proof-empty { text-align: center; padding: 16px; font-family: var(--font-mono); font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .proof-empty svg { width: 26px; height: 26px; display: block; margin: 0 auto 8px; opacity: .7; }
+  .proof-cap { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+  .proof-cap strong { font-weight: 500; font-size: 15px; }
+  .proof-cap span { font-family: var(--font-mono); font-size: 11.5px; color: var(--muted); letter-spacing: 0.04em; white-space: nowrap; }
+
+  /* ---------- Services ---------- */
+  .services { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--line); }
+  .service { padding: 28px 28px 30px 0; border-bottom: 1px solid var(--line); }
+  .service + .service { padding-left: 28px; border-left: 1px solid var(--line); }
+  .service .fmt { font-family: var(--font-mono); font-size: 12px; color: var(--accent); letter-spacing: 0.08em; }
+  .service h3 { font-family: var(--font-display); font-weight: 600; font-size: 24px; letter-spacing: -0.02em; margin: 8px 0 8px; }
+  .service p { margin: 0 0 14px; color: var(--muted); font-size: 15.5px; }
+  .service ul { margin: 0; padding: 0; list-style: none; font-size: 14.5px; display: grid; gap: 4px; }
+  .service li::before { content: "+ "; color: var(--accent); font-family: var(--font-mono); }
+
+  .tools { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; margin-top: 36px; }
+  .tools .label { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-right: 6px; }
+  .tools li { list-style: none; padding: 7px 14px; border: 1px solid var(--line); border-radius: 999px; font-size: 14.5px; background: var(--surface); }
+  .tools ul { display: contents; }
+  .also { margin: 18px 0 0; font-size: 14.5px; color: var(--muted); }
+
+  /* ---------- Contact ---------- */
+  .contact { border-top: 1px solid var(--line); }
+  .contact h2 { font-family: var(--font-display); font-weight: 600; font-size: clamp(44px, 9vw, 116px); letter-spacing: -0.045em; line-height: 0.95; margin: 0 0 30px; text-wrap: balance; }
+  .contact h2 span { color: var(--accent); }
+  .contact-lead { max-width: 52ch; color: var(--muted); margin: 0 0 30px; }
+  .email-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-bottom: 34px; }
+  .email { font-family: var(--font-mono); font-size: clamp(16px, 2.4vw, 22px); word-break: break-all; }
+  .copy-btn {
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); cursor: pointer;
+  }
+  .copy-btn:hover { border-color: var(--accent); }
+  .socials { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  footer { border-top: 1px solid var(--line); padding-block: 28px; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+
+  /* ---------- Viewer (video / screenshot) ---------- */
+  .viewer {
+    position: fixed; inset: 0; z-index: 50; background: rgba(8,8,10,.86);
+    display: grid; place-items: center; padding: 56px 16px 24px;
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  }
+  .viewer-box { width: min(100%, 1040px); max-height: 100%; display: grid; place-items: center; }
+  .viewer-box iframe, .viewer-box img { display: block; border: 0; border-radius: 14px; background: #000; max-width: 100%; }
+  .viewer-box iframe.wide { width: 100%; aspect-ratio: 16 / 9; }
+  .viewer-box iframe.tall { height: min(80vh, 760px); aspect-ratio: 9 / 16; }
+  .viewer-box img { max-height: 82vh; width: auto; }
+  .viewer-close {
+    position: absolute; top: calc(14px + env(safe-area-inset-top, 0px)); right: 16px;
+    width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(255,255,255,.3);
+    background: rgba(255,255,255,.08); color: #fff; font-size: 22px; line-height: 1; cursor: pointer;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 960px) {
+    .grid-shorts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .channel-grid { grid-template-columns: minmax(0, 1fr); }
+    .services { grid-template-columns: minmax(0, 1fr); }
+    .service, .service + .service { padding: 24px 0; border-left: 0; }
+  }
+  @media (max-width: 680px) {
+    .wrap { padding-inline: 18px; }
+    .nav a { display: none; }
+    .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-long { grid-template-columns: minmax(0, 1fr); }
+    .grid-shorts { gap: 14px; }
+    .proofs { grid-template-columns: minmax(0, 1fr); }
+    .proof.wide .proof-media { aspect-ratio: 16 / 10; }
+    .btn { padding: 13px 20px; font-size: 13px; }
+    .play { width: 46px; height: 46px; }
+    .clip-info h4 { font-size: 16px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<!-- ===================== TOP BAR ===================== -->
+<header class="topbar">
+  <div class="wrap">
+    <!-- EDIT: your name -->
+    <a class="brand" href="#top">Your Name <span>· Video Editor</span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#work">Work</a>
+      <a href="#channel">Channel</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+      <button class="theme-btn" id="theme-btn" type="button" aria-label="Switch light or dark mode">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <!-- ===================== HERO ===================== -->
+  <div class="wrap hero">
+    <p class="eyebrow rise">Available for freelance editing</p>
+    <!-- EDIT: your name -->
+    <h1 class="rise d1">Hey, I'm Your Name</h1>
+    <!-- EDIT: your one-line pitch -->
+    <p class="lead rise d2">I edit <strong>short-form</strong> and <strong>YouTube</strong> videos built to hold attention: tight pacing, motion graphics, punchy captions and clean sound. I run my own channel, so I edit for results, not just looks.</p>
+    <div class="actions rise d3">
+      <a class="btn" href="#work">View my edits
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+      </a>
+      <a class="btn solid" href="#contact">Hire me
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+
+    <div class="timeline rise d4" aria-hidden="true">
+      <div class="tl-top"><span>SEQUENCE · 1080×1920 · 30 fps</span><span class="tc" id="tc">00:00:11:12</span></div>
+      <div class="tl-body">
+        <span>V2</span>
+        <div class="track v2">
+          <i class="seg" style="left:6%;width:10%"></i><i class="seg" style="left:31%;width:7%"></i>
+          <i class="seg" style="left:52%;width:14%"></i><i class="seg" style="left:80%;width:9%"></i>
+        </div>
+        <span>V1</span>
+        <div class="track v1">
+          <i class="seg" style="left:0;width:17%"></i><i class="seg" style="left:17.4%;width:12%"></i>
+          <i class="seg" style="left:29.8%;width:21%"></i><i class="seg" style="left:51.2%;width:9%"></i>
+          <i class="seg" style="left:60.6%;width:24%"></i><i class="seg" style="left:85%;width:15%"></i>
+        </div>
+        <span>A1</span>
+        <div class="track audio">
+          <i class="seg" style="left:0;width:58%"></i><i class="seg" style="left:58.6%;width:41.4%"></i>
+        </div>
+        <div class="playhead-lane"><div class="playhead" id="playhead"></div></div>
+      </div>
+    </div>
+
+    <!-- EDIT: your real numbers (replace every 0) -->
+    <div class="stats">
+      <div class="stat"><b>0.0M+</b><span>Views on videos I edited</span></div>
+      <div class="stat"><b>000+</b><span>Videos edited</span></div>
+      <div class="stat"><b>00</b><span>Clients &amp; creators</span></div>
+      <div class="stat"><b>00%</b><span>Avg. viewer retention</span></div>
+    </div>
+  </div>
+
+  <!-- ===================== WORK ===================== -->
+  <section id="work">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>My edits</h2>
+        <p>Tap any video to watch it here. Every clip lists what I handled in the edit.</p>
+      </div>
+
+      <!--
+        HOW TO ADD A VIDEO: put the video's link in href="...".
+        YouTube links (watch, youtu.be, or /shorts/) play right on this page and use their own thumbnail automatically.
+        TikTok / Instagram links open in a new tab. For those, add a thumbnail image with data-thumb="thumbs/clip1.jpg".
+      -->
+
+      <!-- EDIT: your showreel (a 30–60s montage of your best moments) -->
+      <a class="showreel" href="#">
+        <div class="clip-thumb" style="--c1:#4b2a1e;--c2:#1d2b4a">
+          <span class="placeholder-note">Add your showreel link</span>
+          <span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>
+          <span class="reel-label"><small>Showreel · 2026</small>The best 60 seconds of my work</span>
+        </div>
+      </a>
+
+      <div class="sub-head"><h3>Short-form</h3><span>9:16 · Shorts, TikTok, Reels</span></div>
+      <!-- EDIT: one <a class="clip"> per short -->
+      <div class="grid-shorts">
+        <a class="clip" href="#">
+          <div class="clip-thumb ratio-916" style="--c1:#5b2340;--c2:#1f1d4d">
+            <span class="badge fmt">SHORTS</span><span class="badge dur">0:42</span>
+            <span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>
+          </div>
+          <div class="clip-info">
+            <h4>Short title goes here</h4>
+            <p class="meta">000K views · My channel</p>
+            <ul class="tags"><li>Captions</li><li>Sound design</li></ul>
+          </div>
+        </a>
+        <a class="clip" href="#">
+          <div class="clip-thumb ratio-916" style="--c1:#1e4a44;--c2:#16263f">
+            <span class="badge fmt">TIKTOK</span><span class="badge dur">0:31</span>
+            <span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>
+          </div>
+          <div class="clip-info">
+            <h4>Short title goes here</h4>
+            <p class="meta">000K views · Client</p>
+            <ul class="tags"><li>Motion graphics</li><li>Zoom cuts</li></ul>
+          </div>
+        </a>
+        <a class="clip" href="#">
+          <div class="clip-thumb ratio-916" style="--c1:#4d3a12;--c2:#3a1630">
+            <span class="badge fmt">REELS</span><span class="badge dur">0:58</span>
+            <span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>
+          </div>
+          <div class="clip-info">
+            <h4>Short title goes here</h4>
+            <p class="meta">000K views · My channel</p>
+            <ul class="tags"><li>Storytelling</li><li>B-roll</li></ul>
+          </div>
+        </a>
+        <a class="clip" href="#">
+          <div class="clip-thumb ratio-916" style="--c1:#24324f;--c2:#401f1f">
+            <span class="badge fmt">SHORTS</span><span class="badge dur">0:24</span>
+            <span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>
+          </div>
+          <div class="clip-info">
+            <h4>Short title goes here</h4>
+            <p class="meta">000K views · Client</p>
+            <ul class="tags"><li>Hook rewrite</li><li>Color</li></ul>
+          </div>
+        </a>
+      </div>
+
+      <div class="sub-head"><h3>Long-form</h3><span>16:9 · YouTube</span></div>
+      <!-- EDIT: one <a class="clip"> per long video -->
+      <div class="grid-long">
+        <a class="clip" href="#">
+          <div class="clip-thumb ratio-169" style="--c1:#2b2350;--c2:#13353a">
+            <span class="badge fmt">YOUTUBE</span><span class="badge dur">12:47</span>
+            <span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>
+          </div>
+          <div class="clip-info">
+            <h4>Long video title goes here</h4>
+            <p class="meta">000K views · My channel</p>
+            <ul class="tags"><li>Full edit</li><li>Pacing</li><li>Thumbnails</li></ul>
+          </div>
+        </a>
+        <a class="clip" href="#">
+          <div class="clip-thumb ratio-169" style="--c1:#4a2a16;--c2:#1c2c3c">
+            <span class="badge fmt">YOUTUBE</span><span class="badge dur">8:05</span>
+            <span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>
+          </div>
+          <div class="clip-info">
+            <h4>Long video title goes here</h4>
+            <p class="meta">000K views · Client</p>
+            <ul class="tags"><li>Motion graphics</li><li>Sound design</li></ul>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CHANNEL & PROOF ===================== -->
+  <section id="channel">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>My channel &amp; results</h2>
+        <p>Real numbers from my own channel. Tap a screenshot to see it full size.</p>
+      </div>
+
+      <div class="channel-grid">
+        <!-- EDIT: your channel info -->
+        <div class="channel-card">
+          <div class="ch-head">
+            <!-- To use your channel picture: replace YN with <img src="channel.jpg" alt=""> -->
+            <div class="ch-avatar">YN</div>
+            <div style="min-width:0">
+              <h3>Channel Name</h3>
+              <p>@yourhandle · YouTube</p>
+            </div>
+          </div>
+          <div class="ch-stats">
+            <div><b>00K</b><span>Subscribers</span></div>
+            <div><b>0.0M</b><span>Total views</span></div>
+            <div><b>000</b><span>Videos posted</span></div>
+            <div><b>000K</b><span>Views, last 28 days</span></div>
+          </div>
+          <span class="ch-flag">Monetized</span>
+          <div class="ch-links">
+            <a class="btn" href="https://youtube.com/@yourhandle" target="_blank" rel="noopener">Visit channel ↗</a>
+            <a class="btn" href="https://tiktok.com/@yourhandle" target="_blank" rel="noopener">TikTok ↗</a>
+          </div>
+        </div>
+
+        <!--
+          EDIT: proof screenshots. Save each image in your GitHub repo with these exact file names
+          (or change the file names here). Cover anything private (bank details, emails) before uploading.
+        -->
+        <div class="proofs">
+          <button class="proof wide" type="button" data-img="proof-analytics.png">
+            <div class="proof-media">
+              <img src="proof-analytics.png" alt="Channel analytics overview">
+              <div class="proof-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 15l3-4 3 3 4-6"/></svg>Add proof-analytics.png</div>
+            </div>
+            <div class="proof-cap"><strong>Channel analytics overview</strong><span>VIEWS · WATCH TIME</span></div>
+          </button>
+          <button class="proof" type="button" data-img="proof-earnings.png">
+            <div class="proof-media">
+              <img src="proof-earnings.png" alt="Channel earnings screenshot">
+              <div class="proof-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M12 8v8M9.5 10.5c0-1 1-1.5 2.5-1.5s2.5.6 2.5 1.6c0 2.4-5 1.2-5 3.6 0 1 1 1.8 2.5 1.8s2.5-.6 2.5-1.6"/></svg>Add proof-earnings.png</div>
+            </div>
+            <div class="proof-cap"><strong>Channel earnings</strong><span>REVENUE</span></div>
+          </button>
+          <button class="proof" type="button" data-img="proof-retention.png">
+            <div class="proof-media">
+              <img src="proof-retention.png" alt="Audience retention graph">
+              <div class="proof-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M6 8c3 0 4 6 7 6s3-3 5-3"/></svg>Add proof-retention.png</div>
+            </div>
+            <div class="proof-cap"><strong>Audience retention</strong><span>BEST VIDEO</span></div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SERVICES ===================== -->
+  <section id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>What I can edit for you</h2>
+        <p>Send me raw footage and a reference. I'll handle the rest.</p>
+      </div>
+      <!-- EDIT: your services -->
+      <div class="services">
+        <div class="service">
+          <span class="fmt">9:16</span>
+          <h3>Short-form</h3>
+          <p>Shorts, TikToks and Reels cut for a strong hook and high retention.</p>
+          <ul><li>Hook-first structure</li><li>Animated captions</li><li>Sound effects &amp; music</li></ul>
+        </div>
+        <div class="service">
+          <span class="fmt">16:9</span>
+          <h3>YouTube long-form</h3>
+          <p>Full edits that keep viewers watching to the end.</p>
+          <ul><li>Pacing &amp; jump cuts</li><li>B-roll &amp; zooms</li><li>Color &amp; audio cleanup</li></ul>
+        </div>
+        <div class="service">
+          <span class="fmt">MOGRAPH</span>
+          <h3>Motion graphics</h3>
+          <p>Titles, lower thirds and animated explainers that make ideas easy to follow.</p>
+          <ul><li>Text animation</li><li>Maps &amp; callouts</li><li>Channel intros</li></ul>
+        </div>
+      </div>
+
+      <!-- EDIT: the software you use -->
+      <div class="tools">
+        <span class="label">Tools</span>
+        <ul>
+          <li>Premiere Pro</li><li>After Effects</li><li>CapCut</li><li>DaVinci Resolve</li><li>Photoshop</li>
+        </ul>
+      </div>
+      <p class="also">I also study computer science, so I'm quick with new software and organized file handoffs.</p>
+    </div>
+  </section>
+
+  <!-- ===================== CONTACT ===================== -->
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <h2>Let's make your next video <span>hit.</span></h2>
+      <p class="contact-lead">Tell me about your channel and what you need edited. I usually reply within a day.</p>
+      <div class="email-row">
+        <!-- EDIT: your email (change it in both places on this line) -->
+        <a class="email" id="email" href="mailto:you@example.com">you@example.com</a>
+        <button class="copy-btn" id="copy-btn" type="button">Copy email</button>
+      </div>
+      <!-- EDIT: your links -->
+      <div class="socials">
+        <a class="btn solid" href="https://calendly.com/yourname" target="_blank" rel="noopener">Book a call ↗</a>
+        <a class="btn" href="https://youtube.com/@yourhandle" target="_blank" rel="noopener">YouTube ↗</a>
+        <a class="btn" href="https://tiktok.com/@yourhandle" target="_blank" rel="noopener">TikTok ↗</a>
+        <a class="btn" href="https://instagram.com/yourhandle" target="_blank" rel="noopener">Instagram ↗</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Your Name</span>
+    <span>Video editor · Open for freelance work</span>
+  </div>
+</footer>
+
+<div class="viewer" id="viewer" hidden>
+  <button class="viewer-close" id="viewer-close" type="button" aria-label="Close">×</button>
+  <div class="viewer-box" id="viewer-box"></div>
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+
+    /* Theme toggle (remembered per visitor) */
+    try { var saved = localStorage.getItem('theme'); if (saved) root.setAttribute('data-theme', saved); } catch (e) {}
+    document.getElementById('theme-btn').addEventListener('click', function () {
+      var current = root.getAttribute('data-theme') ||
+        (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      var next = current === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+
+    /* Timeline playhead + timecode (30 fps, 24 s loop) */
+    var head = document.getElementById('playhead'), tc = document.getElementById('tc');
+    var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
+    function draw(t) {
+      var p = (t % 24000) / 24000;
+      head.style.left = (p * 100) + '%';
+      var frames = Math.floor(p * 24 * 30);
+      tc.textContent = '00:00:' + pad(Math.floor(frames / 30)) + ':' + pad(frames % 30);
+    }
+    if (!still) { (function loop(t) { draw(t); requestAnimationFrame(loop); })(9000); }
+
+    /* Video links: YouTube plays here, everything else opens in a new tab */
+    function ytId(url) {
+      var m = url.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/)|youtu\.be\/)([\w-]{11})/);
+      return m ? m[1] : null;
+    }
+    var viewer = document.getElementById('viewer'), box = document.getElementById('viewer-box');
+    function openViewer(node) { box.innerHTML = ''; box.appendChild(node); viewer.hidden = false; document.body.style.overflow = 'hidden'; }
+    function closeViewer() { viewer.hidden = true; box.innerHTML = ''; document.body.style.overflow = ''; }
+    document.getElementById('viewer-close').addEventListener('click', closeViewer);
+    viewer.addEventListener('click', function (e) { if (e.target === viewer) closeViewer(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !viewer.hidden) closeViewer(); });
+
+    document.querySelectorAll('a.clip, a.showreel').forEach(function (a) {
+      var href = a.getAttribute('href') || '#';
+      var thumb = a.querySelector('.clip-thumb');
+      var id = ytId(href);
+      var custom = a.getAttribute('data-thumb');
+      if (custom || id) {
+        thumb.style.backgroundImage = 'url("' + (custom || ('https://i.ytimg.com/vi/' + id + '/hqdefault.jpg')) + '")';
+        thumb.classList.add('has-img');
+      }
+      if (href !== '#' && !id) { a.target = '_blank'; a.rel = 'noopener'; }
+      a.addEventListener('click', function (e) {
+        if (href === '#') { e.preventDefault(); return; }
+        if (!id) return;
+        e.preventDefault();
+        var f = document.createElement('iframe');
+        f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
+        f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+        f.allowFullscreen = true;
+        f.title = 'Video player';
+        f.className = (/\/shorts\//.test(href) || thumb.classList.contains('ratio-916')) ? 'tall' : 'wide';
+        openViewer(f);
+      });
+    });
+
+    /* Proof screenshots: show the image if it exists, otherwise keep the placeholder */
+    document.querySelectorAll('.proof').forEach(function (btn) {
+      var media = btn.querySelector('.proof-media'), img = media.querySelector('img');
+      function missing() { if (img && img.parentNode) img.remove(); img = null; }
+      function found() { media.classList.add('filled'); }
+      if (img.complete) { img.naturalWidth ? found() : missing(); }
+      else { img.addEventListener('load', found); img.addEventListener('error', missing); }
+      btn.addEventListener('click', function () {
+        if (!img) return;
+        var big = document.createElement('img');
+        big.src = btn.getAttribute('data-img'); big.alt = img.alt;
+        openViewer(big);
+      });
+    });
+
+    /* Copy email */
+    var cbtn = document.getElementById('copy-btn'), email = document.getElementById('email');
+    cbtn.addEventListener('click', function () {
+      var text = email.textContent.trim();
+      function done() { cbtn.textContent = 'Copied'; setTimeout(function () { cbtn.textContent = 'Copy email'; }, 1600); }
+      function fallback() {
+        var r = document.createRange(); r.selectNodeContents(email);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        cbtn.textContent = 'Press Ctrl+C';
+      }
+      try { navigator.clipboard.writeText(text).then(done, fallback); } catch (e) { fallback(); }
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  })();
+</script>
+</body>
+</html>
