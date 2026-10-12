@@ -295,6 +295,56 @@
   .tools ul { display: contents; }
   .also { margin: 18px 0 0; font-size: 14.5px; color: var(--muted); }
 
+  .tools + .tools { margin-top: 12px; }
+  .tools .label { min-width: 96px; }
+
+  /* Editing journey (a real sequence, so it is numbered) */
+  .journey { margin-top: 48px; display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 2.2fr); gap: 32px; align-items: center; }
+  .journey-head b { display: block; font-family: var(--font-display); font-weight: 600; font-size: clamp(52px, 7vw, 88px); letter-spacing: -0.045em; line-height: 0.95; }
+  .journey-head span { display: block; margin-top: 10px; color: var(--muted); font-size: 15.5px; max-width: 30ch; }
+  .path { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; }
+  .path li { min-width: 0; padding-right: 10px; }
+  .path li::before { content: ""; display: block; height: 26px; border-radius: 6px; margin-bottom: 12px; background: color-mix(in srgb, var(--c) 70%, var(--surface)); }
+  .path li:nth-child(1) { --c: #9a8f86; }
+  .path li:nth-child(2) { --c: #5aa9ff; }
+  .path li:nth-child(3) { --c: #b28cff; }
+  .path li:nth-child(4) { --c: var(--accent); }
+  .path li.now::before { background: var(--accent); }
+  .path .step { display: block; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.08em; color: var(--muted); }
+  .path strong { display: block; font-family: var(--font-display); font-weight: 600; font-size: 17px; line-height: 1.25; margin-top: 2px; }
+  .path em { font-style: normal; font-size: 13px; color: var(--muted); }
+  .path li.now em { color: var(--accent); }
+
+  /* ---------- Thumbnails ---------- */
+  .compare {
+    --pos: 50%; position: relative; aspect-ratio: 16 / 9; max-width: 100%;
+    border-radius: 18px; overflow: hidden; border: 1px solid var(--line); background: #000;
+    user-select: none; -webkit-user-select: none;
+  }
+  .compare img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .compare .before { clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
+  .compare .divider { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px; margin-left: -1px; background: #fff; pointer-events: none; }
+  .compare .knob {
+    position: absolute; top: 50%; left: var(--pos); transform: translate(-50%, -50%);
+    width: 46px; height: 46px; border-radius: 50%; background: #fff; color: #111;
+    display: grid; place-items: center; box-shadow: 0 4px 18px rgba(0,0,0,.45); pointer-events: none;
+  }
+  .compare .knob svg { width: 20px; height: 20px; }
+  .compare input[type="range"] { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; }
+  .compare input:focus-visible ~ .knob { outline: 3px solid var(--accent); outline-offset: 3px; }
+  .cmp-label {
+    position: absolute; top: 12px; z-index: 2; pointer-events: none;
+    font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.06em;
+    color: #fff; background: rgba(0,0,0,.6); padding: 3px 8px; border-radius: 6px;
+  }
+  .cmp-label.l { left: 12px; }
+  .cmp-label.r { right: 12px; }
+  .art-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; margin-top: 22px; }
+  .art { all: unset; cursor: zoom-in; display: block; aspect-ratio: 16 / 9; max-width: 100%; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); transition: border-color .2s; }
+  .art:hover { border-color: var(--accent); }
+  .art:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  .art img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
   /* ---------- Contact ---------- */
   .contact { border-top: 1px solid var(--line); }
   .contact h2 { font-family: var(--font-display); font-weight: 600; font-size: clamp(44px, 9vw, 116px); letter-spacing: -0.045em; line-height: 0.95; margin: 0 0 30px; text-wrap: balance; }
@@ -334,12 +384,16 @@
     .grid-long { grid-template-columns: minmax(0, 1fr); max-width: 640px; }
     .channel-grid { grid-template-columns: minmax(0, 1fr); }
     .services { grid-template-columns: minmax(0, 1fr); }
+    .journey { grid-template-columns: minmax(0, 1fr); gap: 24px; }
     .service, .service + .service { padding: 24px 0; border-left: 0; }
   }
   @media (max-width: 680px) {
     .wrap { padding-inline: 18px; }
     .nav a { display: none; }
     .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .path { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 20px; }
+    .art-grid { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+    .tools .label { flex-basis: 100%; }
     /* shorts become a swipeable row on phones */
     .grid-shorts {
       grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 66%;
@@ -368,6 +422,7 @@
     </a>
     <nav class="nav" aria-label="Main">
       <a href="#work">Work</a>
+      <a href="#thumbnails">Thumbnails</a>
       <a href="#channel">Channel</a>
       <a href="#services">Services</a>
       <a href="#contact">Contact</a>
@@ -383,7 +438,7 @@
   <div class="wrap hero">
     <p class="eyebrow rise">Available for freelance editing</p>
     <h1 class="rise d1">I'm Kysophy<span class="aka">You can call me <b>Kai</b>.</span></h1>
-    <p class="lead rise d2">I'm a video editor and the creator behind a <strong>Decaying Winter</strong> YouTube channel with <strong>5.9M+ views</strong>, almost all from long-form videos. I cut cinematic pieces, game guides and fun, fast-paced videos, with the pacing, subtitles and sound design that keep people watching.</p>
+    <p class="lead rise d2">I'm a video editor and the creator behind a <strong>Decaying Winter</strong> YouTube channel with <strong>5.9M+ views</strong>, almost all from long-form videos. I cut cinematic pieces, game guides and fun, fast-paced videos, with the pacing, subtitles and sound design that keep people watching. I design my own thumbnails too.</p>
     <div class="actions rise d3">
       <a class="btn" href="#work">View my edits
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
@@ -422,7 +477,7 @@
     <div class="stats">
       <div class="stat"><b>5.9M+</b><span>Channel views, mostly long-form</span></div>
       <div class="stat"><b>18K+</b><span>Subscribers</span></div>
-      <div class="stat"><b>150+</b><span>Videos published</span></div>
+      <div class="stat"><b>7+</b><span>Years of editing</span></div>
       <div class="stat"><b>380K</b><span>Views in my best month</span></div>
     </div>
   </div>
@@ -535,6 +590,33 @@
     </div>
   </section>
 
+  <!-- ===================== THUMBNAILS ===================== -->
+  <section id="thumbnails">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Thumbnails &amp; renders</h2>
+        <p>I make my own thumbnails and renders in Krita and online photo editors. Drag the slider to see a raw render become a finished thumbnail.</p>
+      </div>
+
+      <!-- Before/after: render-raw.jpg (before) and render-final.jpg (after) -->
+      <div class="compare" id="compare">
+        <img src="render-final.jpg" alt="Finished thumbnail with outlines, glow and particle effects">
+        <img class="before" src="render-raw.jpg" alt="Raw render before editing">
+        <span class="cmp-label l">RAW RENDER</span>
+        <span class="cmp-label r">FINAL</span>
+        <span class="divider" aria-hidden="true"></span>
+        <input type="range" id="compare-range" min="0" max="100" value="50" aria-label="Drag to compare the raw render and the final thumbnail">
+        <span class="knob" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+      </div>
+
+      <!-- EDIT: add more thumbnails by copying a <button class="art"> block and changing both file names -->
+      <div class="art-grid">
+        <button class="art" type="button" data-img="thumb-duel.jpg"><img src="thumb-duel.jpg" alt="Thumbnail: two Roblox characters facing off with red and purple glow" loading="lazy"></button>
+        <button class="art" type="button" data-img="thumb-laser.jpg"><img src="thumb-laser.jpg" alt="Thumbnail: character firing a blue laser in falling snow" loading="lazy"></button>
+      </div>
+    </div>
+  </section>
+
   <!-- ===================== CHANNEL & PROOF ===================== -->
   <section id="channel">
     <div class="wrap">
@@ -635,14 +717,28 @@
         </div>
       </div>
 
-      <!-- EDIT: the software you use -->
-      <div class="tools">
-        <span class="label">Tools</span>
-        <ul>
-          <li>Premiere Pro</li><li>CapCut</li><li>DaVinci Resolve</li><li>Photoshop</li>
-        </ul>
+      <div class="journey">
+        <div class="journey-head">
+          <b>7+ years</b>
+          <span>of editing, from my first iMovie cuts to DaVinci Resolve Studio today.</span>
+        </div>
+        <ol class="path">
+          <li><span class="step">01</span><strong>iMovie</strong><em>Where it started</em></li>
+          <li><span class="step">02</span><strong>Microsoft Clipchamp</strong><em>Learning the basics</em></li>
+          <li><span class="step">03</span><strong>CapCut &amp; Premiere Pro</strong><em>Getting serious</em></li>
+          <li class="now"><span class="step">04</span><strong>DaVinci Resolve Studio</strong><em>What I use now</em></li>
+        </ol>
       </div>
-      <p class="also">I also study Information Technology, so I'm quick with new software and organized file handoffs.</p>
+
+      <div class="tools">
+        <span class="label">Editing</span>
+        <ul><li>DaVinci Resolve Studio</li><li>Premiere Pro</li><li>CapCut</li></ul>
+      </div>
+      <div class="tools">
+        <span class="label">Thumbnails</span>
+        <ul><li>Krita</li><li>Online photo editors</li></ul>
+      </div>
+      <p class="also">I also study computer science, so I'm quick with new software and organized file handoffs.</p>
     </div>
   </section>
 
@@ -748,6 +844,19 @@
         if (!img) return;
         var big = document.createElement('img');
         big.src = btn.getAttribute('data-img'); big.alt = img.alt;
+        openViewer(big);
+      });
+    });
+
+    /* Before/after slider */
+    var cmp = document.getElementById('compare'), range = document.getElementById('compare-range');
+    range.addEventListener('input', function () { cmp.style.setProperty('--pos', range.value + '%'); });
+
+    /* Thumbnails open full size */
+    document.querySelectorAll('.art').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var big = document.createElement('img');
+        big.src = btn.getAttribute('data-img'); big.alt = btn.querySelector('img').alt;
         openViewer(big);
       });
     });
