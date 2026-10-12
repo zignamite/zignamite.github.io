@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-  /* Layout: dark editing-suite feel. Huge hero over a live timeline, then edits, channel + earnings proof, services, contact. */
+  /* Layout: dark editing-suite feel. Huge hero over a live timeline, then edits, channel results, services, contact. */
   :root {
     --bg: #131315;
     --surface: #1b1b1f;
@@ -251,7 +251,26 @@
     border: 1.5px dashed var(--line); background: var(--surface-2);
     display: grid; place-items: center; transition: border-color .2s;
   }
-  .proof.wide .proof-media { aspect-ratio: 1552 / 840; }
+  .proof.wide .proof-media { aspect-ratio: 1432 / 758; }
+  .proofs.single { grid-template-columns: minmax(0, 1fr); margin-top: 28px; }
+
+  /* ---------- Results as text ---------- */
+  .results { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--line); }
+  .result { padding: 22px 22px 24px 0; border-bottom: 1px solid var(--line); min-width: 0; }
+  .result:nth-child(odd):not(.hero-num) { padding-left: 22px; border-left: 1px solid var(--line); }
+  .result b {
+    display: block; font-family: var(--font-display); font-weight: 600;
+    font-size: clamp(34px, 4.2vw, 52px); letter-spacing: -0.035em; line-height: 1; font-variant-numeric: tabular-nums;
+  }
+  .result b small { font-size: 0.45em; letter-spacing: 0; color: var(--muted); font-weight: 500; margin-left: 2px; }
+  .result span { display: block; margin-top: 10px; font-size: 15px; color: var(--muted); max-width: 32ch; }
+  .result.hero-num { grid-column: 1 / -1; padding: 8px 0 26px; }
+  .result.hero-num b {
+    font-size: clamp(48px, 8vw, 104px); letter-spacing: -0.05em; line-height: 0.95;
+    background: linear-gradient(100deg, var(--fg) 30%, var(--accent));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .result.hero-num span { max-width: 44ch; font-size: 16px; }
   .proof:hover .proof-media { border-color: var(--accent); }
   .proof-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
   .proof-media.filled { border-style: solid; background: #0f0f0f; }
@@ -259,32 +278,6 @@
   .proof-cap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 12px; align-items: baseline; }
   .proof-cap strong { font-weight: 500; font-size: 15px; }
   .proof-cap span { font-family: var(--font-mono); font-size: 11.5px; color: var(--muted); letter-spacing: 0.04em; }
-
-  /* ---------- Earnings chart ---------- */
-  .earnings { margin-top: 28px; background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: clamp(20px, 3vw, 32px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr); gap: clamp(24px, 4vw, 48px); }
-  .earn-facts { display: grid; gap: 22px; align-content: start; }
-  .earn-facts h3 { font-family: var(--font-display); font-weight: 600; font-size: 22px; letter-spacing: -0.02em; margin: 0; }
-  .earn-fact b { display: block; font-family: var(--font-display); font-weight: 600; font-size: clamp(30px, 3.6vw, 40px); letter-spacing: -0.03em; line-height: 1.05; font-variant-numeric: tabular-nums; }
-  .earn-fact span { font-size: 14px; color: var(--muted); }
-  .chart { position: relative; min-width: 0; }
-  .chart-title { font-size: 14px; color: var(--muted); margin: 0 0 14px; }
-  .plot { position: relative; height: 230px; margin-left: 44px; }
-  .gridline { position: absolute; left: 0; right: 0; height: 0; border-top: 1px solid var(--line); }
-  .gridline span { position: absolute; right: calc(100% + 8px); top: -9px; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
-  .bars { position: absolute; inset: 0; display: flex; align-items: flex-end; gap: 2px; }
-  .bar { flex: 1; height: 100%; display: flex; align-items: flex-end; justify-content: center; position: relative; cursor: default; outline: none; }
-  .bar i { display: block; width: 72%; max-width: 22px; border-radius: 4px 4px 0 0; background: color-mix(in srgb, var(--accent) 55%, var(--surface)); transition: background .15s; }
-  .bar.top i { background: var(--accent); }
-  .bar:hover i, .bar:focus-visible i { background: var(--fg); }
-  .bar .direct { position: absolute; bottom: calc(var(--h) + 6px); font-family: var(--font-mono); font-size: 11px; color: var(--fg); white-space: nowrap; }
-  .xlabels { display: flex; gap: 2px; margin-left: 44px; margin-top: 8px; font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
-  .xlabels span { flex: 1; text-align: center; white-space: nowrap; overflow: visible; }
-  .tip {
-    position: absolute; z-index: 3; pointer-events: none; transform: translate(-50%, -100%);
-    background: var(--fg); color: var(--bg); font-family: var(--font-mono); font-size: 12px;
-    padding: 6px 10px; border-radius: 8px; white-space: nowrap;
-  }
-  .chart-note { font-size: 13px; color: var(--muted); margin: 16px 0 0; }
 
   /* ---------- Services ---------- */
   .services { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--line); }
@@ -340,7 +333,6 @@
   @media (max-width: 960px) {
     .grid-long { grid-template-columns: minmax(0, 1fr); max-width: 640px; }
     .channel-grid { grid-template-columns: minmax(0, 1fr); }
-    .earnings { grid-template-columns: minmax(0, 1fr); }
     .services { grid-template-columns: minmax(0, 1fr); }
     .service, .service + .service { padding: 24px 0; border-left: 0; }
   }
@@ -358,7 +350,6 @@
     .play { width: 46px; height: 46px; }
     .clip-info h4 { font-size: 16px; }
     .ch-body { padding: 0 20px 22px; }
-    .bar .direct { display: none; }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -426,13 +417,13 @@
 
     <!--
       Numbers use "+" so they stay true as the channel grows. No need to update them often.
-      Source: channel page (5,940,837 views, 18.4K subs, 153 videos) and the earnings sheet ($1,154.84 lifetime).
+      Source: channel page (5,940,837 views, 18.4K subs, 153 videos) and YouTube Studio (380,290 views, Sept–Oct 2026).
     -->
     <div class="stats">
       <div class="stat"><b>5.9M+</b><span>Channel views, mostly long-form</span></div>
       <div class="stat"><b>18K+</b><span>Subscribers</span></div>
       <div class="stat"><b>150+</b><span>Videos published</span></div>
-      <div class="stat"><b>$1,150+</b><span>Earned on YouTube</span></div>
+      <div class="stat"><b>380K</b><span>Views in my best month</span></div>
     </div>
   </div>
 
@@ -549,7 +540,7 @@
     <div class="wrap">
       <div class="sec-head">
         <h2>My channel &amp; results</h2>
-        <p>Screenshots straight from my YouTube Studio. Tap one to see it full size.</p>
+        <p>Numbers from my own channel, where I'm the one editing every video.</p>
       </div>
 
       <div class="channel-grid">
@@ -578,47 +569,40 @@
           </div>
         </div>
 
-        <!-- Proof screenshots. Keep these image files in the same folder as index.html. -->
-        <div class="proofs">
-          <button class="proof wide" type="button" data-img="proof-analytics.png">
-            <div class="proof-media">
-              <img src="proof-analytics.png" alt="YouTube Studio overview: 380.3K views and $193.71 estimated revenue, Sept to Oct 2026">
-              <div class="proof-empty">proof-analytics.png</div>
-            </div>
-            <div class="proof-cap"><strong>380K views in one month, 924% above normal</strong><span>SEPT–OCT 2026</span></div>
-          </button>
-          <button class="proof" type="button" data-img="proof-earnings.png">
-            <div class="proof-media">
-              <img src="proof-earnings.png" alt="YouTube Studio monthly earnings, May to October 2026">
-              <div class="proof-empty">proof-earnings.png</div>
-            </div>
-            <div class="proof-cap"><strong>Monthly earnings</strong><span>MAY–OCT 2026</span></div>
-          </button>
-          <button class="proof" type="button" data-img="proof-channel.png">
-            <div class="proof-media">
-              <img src="proof-channel.png" alt="Kysophy channel page: 18.4K subscribers, 153 videos, 5,940,837 views">
-              <div class="proof-empty">proof-channel.png</div>
-            </div>
-            <div class="proof-cap"><strong>Public channel stats</strong><span>5.9M VIEWS</span></div>
-          </button>
+        <!-- Channel results as text. The "+" numbers stay true as the channel grows. -->
+        <div class="results">
+          <div class="result hero-num">
+            <b>5,900,000+</b>
+            <span>lifetime views on my channel, almost all of them from long-form videos</span>
+          </div>
+          <div class="result">
+            <b>924%</b>
+            <span>more views than usual in my best month: 380K views in 28 days (Sept–Oct 2026)</span>
+          </div>
+          <div class="result">
+            <b>~$200<small>/mo</small></b>
+            <span>what my channel earns when I upload consistently</span>
+          </div>
+          <div class="result">
+            <b>18K+</b>
+            <span>subscribers who came for the edits</span>
+          </div>
+          <div class="result">
+            <b>150+</b>
+            <span>videos published since 2019, every one edited by me</span>
+          </div>
         </div>
       </div>
 
-      <!-- Earnings history from the earnings spreadsheet. It covers Mar 2025 to Sep 2026, so it never needs updating. -->
-      <div class="earnings">
-        <div class="earn-facts">
-          <h3>Earnings history</h3>
-          <div class="earn-fact"><b>$1,150+</b><span>Earned since the channel was monetized in March 2025</span></div>
-          <div class="earn-fact"><b>$202</b><span>Best month, August 2026</span></div>
-          <div class="earn-fact"><b>$697</b><span>Earned Jan–Sep 2026, already 1.5× all of 2025</span></div>
-        </div>
-        <div class="chart">
-          <p class="chart-title">YouTube earnings per month, US$</p>
-          <div class="plot" id="plot" role="img" aria-label="Monthly YouTube earnings from March 2025 to September 2026, rising to a best month of $202 in August 2026."></div>
-          <div class="xlabels" id="xlabels" aria-hidden="true"></div>
-          <div class="tip" id="tip" hidden></div>
-          <p class="chart-note">Hover or tap a bar to see the exact amount.</p>
-        </div>
+      <!-- Proof screenshot (revenue box blurred). Keep proof-analytics.png in the same folder as index.html. -->
+      <div class="proofs single">
+        <button class="proof wide" type="button" data-img="proof-analytics.png">
+          <div class="proof-media">
+            <img src="proof-analytics.png" alt="YouTube Studio overview: 380.3K views in 28 days, 924% more than usual, Sept to Oct 2026">
+            <div class="proof-empty">proof-analytics.png</div>
+          </div>
+          <div class="proof-cap"><strong>My best month in YouTube Studio · tap to enlarge</strong><span>SEPT–OCT 2026</span></div>
+        </button>
       </div>
     </div>
   </section>
@@ -766,44 +750,6 @@
         big.src = btn.getAttribute('data-img'); big.alt = img.alt;
         openViewer(big);
       });
-    });
-
-    /* Earnings chart (from the earnings spreadsheet, US$ per month) */
-    var data = [
-      ['Mar 2025', 16.72], ['Apr 2025', 68.86], ['May 2025', 57.88], ['Jun 2025', 51.90], ['Jul 2025', 47.26],
-      ['Aug 2025', 39.16], ['Sep 2025', 29.97], ['Oct 2025', 26.92], ['Nov 2025', 67.99], ['Dec 2025', 50.93],
-      ['Jan 2026', 17.20], ['Feb 2026', 29.34], ['Mar 2026', 24.31], ['Apr 2026', 18.48], ['May 2026', 37.69],
-      ['Jun 2026', 55.73], ['Jul 2026', 113.89], ['Aug 2026', 202.13], ['Sep 2026', 198.48]
-    ];
-    var max = 250, plot = document.getElementById('plot'), xl = document.getElementById('xlabels'), tip = document.getElementById('tip');
-    [50, 100, 150, 200, 250].forEach(function (v) {
-      var g = document.createElement('div'); g.className = 'gridline'; g.style.bottom = (v / max * 100) + '%';
-      g.innerHTML = '<span>$' + v + '</span>'; plot.appendChild(g);
-    });
-    var base = document.createElement('div'); base.className = 'gridline'; base.style.bottom = '0'; base.innerHTML = '<span>$0</span>'; plot.appendChild(base);
-    var bars = document.createElement('div'); bars.className = 'bars'; plot.appendChild(bars);
-    var best = Math.max.apply(null, data.map(function (d) { return d[1]; }));
-    data.forEach(function (d) {
-      var b = document.createElement('div'); b.className = 'bar' + (d[1] === best ? ' top' : '');
-      b.tabIndex = 0; b.setAttribute('aria-label', d[0] + ': $' + d[1].toFixed(2));
-      var h = (d[1] / max * 100) + '%';
-      b.style.setProperty('--h', h);
-      b.innerHTML = '<i style="height:' + h + '"></i>' + (d[1] === best ? '<span class="direct">$' + Math.round(d[1]) + '</span>' : '');
-      function show() {
-        var pr = plot.getBoundingClientRect(), br = b.getBoundingClientRect(), cr = plot.parentNode.getBoundingClientRect();
-        tip.textContent = d[0] + ' · $' + d[1].toFixed(2);
-        tip.hidden = false;
-        var x = br.left + br.width / 2 - cr.left;
-        x = Math.max(70, Math.min(cr.width - 70, x));
-        tip.style.left = x + 'px';
-        tip.style.top = (pr.bottom - cr.top - (d[1] / max) * pr.height - 10) + 'px';
-      }
-      b.addEventListener('pointerenter', show); b.addEventListener('focus', show); b.addEventListener('click', show);
-      b.addEventListener('pointerleave', function () { tip.hidden = true; }); b.addEventListener('blur', function () { tip.hidden = true; });
-      bars.appendChild(b);
-      var s = document.createElement('span');
-      s.textContent = (d[0] === 'Mar 2025' || d[0] === 'Jan 2026' || d[0] === 'Sep 2026') ? d[0].replace(' 20', " '") : '';
-      xl.appendChild(s);
     });
 
     /* Copy email */
